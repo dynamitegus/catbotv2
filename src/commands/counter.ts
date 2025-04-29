@@ -12,20 +12,7 @@ var x = 0;
 export class Example {
   // make single handler for simple and slash command
 
-  async count(command: CommandInteraction | Message): Promise<void> {
-    await command.reply("I like it, Thanks" + x.toString());
-  }
-
-  @SimpleCommand({ name: "count" })
-  async simpleCount(command: SimpleCommandMessage): Promise<void> {
-    await this.count(command.message);
-  }
-
-  @Slash({ description: "counter", name: "count" })
-  async slashCount(command: CommandInteraction): Promise<void> {
-    await this.count(command);
-  }
-
+//count add
   async countadd(command: CommandInteraction | Message): Promise<void> {
     x += 1;
     await command.reply("current count: " + x.toString());
@@ -40,4 +27,19 @@ export class Example {
   async slashCountadd(command: CommandInteraction): Promise<void> {
     await this.countadd(command);
   }
+//count reset
+async countreset(command: CommandInteraction | Message): Promise<void> {
+  x = 0;
+  await command.reply("counter is now: " + x.toString());
+}
+
+@SimpleCommand({ name: "countreset", aliases: ["count reset"] })
+async simpleCountreset(command: SimpleCommandMessage): Promise<void> {
+  await this.countreset(command.message);
+}
+
+@Slash({ description: "reset counter", name: "countreset"})
+async slashCountreset(command: CommandInteraction): Promise<void> {
+  await this.countreset(command);
+}
 }
