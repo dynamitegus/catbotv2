@@ -42,4 +42,19 @@ async simpleCountreset(command: SimpleCommandMessage): Promise<void> {
 async slashCountreset(command: CommandInteraction): Promise<void> {
   await this.countreset(command);
 }
+//count remove
+async countremove(command: CommandInteraction | Message): Promise<void> {
+  x -= 1;
+  await command.reply("current count: " + x.toString());
+}
+
+@SimpleCommand({ name: "countremove", aliases: ["count remove"] })
+async simpleCountremove(command: SimpleCommandMessage): Promise<void> {
+  await this.countremove(command.message);
+}
+
+@Slash({ description: "take away from counter", name: "countremove"})
+async slashCountremove(command: CommandInteraction): Promise<void> {
+  await this.countremove(command);
+}
 }
